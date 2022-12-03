@@ -37,7 +37,7 @@ public class KafkaProducerExample {
 	@Bean
 	public ApplicationRunner runner(KafkaTemplate<String, String> template) {
 		return args -> {
-			template.send("prices", "Sishui Uchiha");
+			template.send("prices", "Test Message");
 		};
 	}
 
