@@ -1,11 +1,11 @@
-package com.example.kafkademo;
+package com.example.kafkaconfig;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class KafkaConfig {
 
-    static Map<String, Object> config() {
+    public static Map<String, Object> Config() {
 
         Map<String, Object> config = new HashMap<>();
 
