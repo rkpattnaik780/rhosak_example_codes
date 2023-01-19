@@ -1,10 +1,17 @@
 import time
 import os
+import argparse
 from confluent_kafka import Consumer
 
 import requests
 
 from dotenv import load_dotenv
+
+parser = argparse.ArgumentParser(description='Python Kafka consumer')
+parser.add_argument('--max-messages', metavar='N', type=int,
+                    help='Maximum number of messages to be consumed', default=1)
+
+args = parser.parse_args()
 
 load_dotenv()
 
@@ -27,8 +34,8 @@ def _get_token(config):
     token = resp.json()
     return token["access_token"], time.time() + float(token["expires_in"])
 
-
 topic = "prices"
+
 consumer_conf = {
     "bootstrap.servers": kafka_host,
     "security.protocol": "SASL_SSL",
@@ -42,7 +49,11 @@ consumer = Consumer(consumer_conf)
 
 consumer.subscribe([topic])
 
+messages_count = 0
+
 while True:
+    if messages_count >= args.max_messages:
+        break
     try:
         # SIGINT can't be handled when polling, limit timeout to 1 second.
         msg = consumer.poll(1.0)
@@ -50,6 +61,7 @@ while True:
             continue
 
         print(msg.value())
+        messages_count = messages_count + 1
     except KeyboardInterrupt:
         break
 
