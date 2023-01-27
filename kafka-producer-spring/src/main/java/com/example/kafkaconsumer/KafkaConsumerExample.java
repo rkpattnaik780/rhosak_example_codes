@@ -5,17 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KafkaConsumerExample implements CommandLineRunner {
+public class KafkaConsumerExample {
 
     public static void main(String[] args) {
         SpringApplication.run(KafkaConsumerExample.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-
-       System.exit(0);
-
     }
 
 }
