@@ -33,7 +33,7 @@ public class ConsumerExample {
 
         //polling
         while(true){
-            if(messagesCount > MAX_MESSAGES_CONSUMED) {
+            if(messagesCount >= MAX_MESSAGES_CONSUMED) {
                 break;
             }
             ConsumerRecords<String,String> records=consumer.poll(Duration.ofMillis(100));
