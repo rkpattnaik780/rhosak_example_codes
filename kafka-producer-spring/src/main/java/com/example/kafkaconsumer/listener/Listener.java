@@ -15,6 +15,9 @@ import java.util.Map;
 @Component
 public class Listener {
 
+    public static int MAX_MESSAGES_CONSUMED = 1;
+    public static int messagesCount = 0;
+
     @KafkaListener(topics = "prices",
             containerFactory = "concurrentKafkaListenerContainerFactory",
             groupId = "group_id")
@@ -22,7 +25,10 @@ public class Listener {
     // Method
     public void consume(String message)
     {
-        // Print statement
         System.out.println(message);
-    }
+        messagesCount ++;
+        if(messagesCount >= MAX_MESSAGES_CONSUMED) {
+            System.exit(0);
+        }    
+    }       
 }

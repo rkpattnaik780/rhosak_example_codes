@@ -1,6 +1,5 @@
 package com.example.kafkademo;
 
-import com.example.kafkaconsumer.KafkaConsumerExample;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.ApplicationRunner;
@@ -14,12 +13,18 @@ import org.springframework.kafka.core.ProducerFactory;
 import com.example.kafkaconfig.KafkaConfig;
 
 import java.util.Map;
+import java.lang.System;
 
 @SpringBootApplication
-public class KafkaProducerExample {
+public class KafkaProducerExample implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KafkaProducerExample.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		System.exit(0);
 	}
 
 	@Bean
